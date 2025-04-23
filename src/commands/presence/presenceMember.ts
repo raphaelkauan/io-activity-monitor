@@ -1,6 +1,7 @@
 import { ApplicationCommandType } from "discord.js";
 import { Command } from "../../infra/settings/types/Command";
 import { Prisma } from "../../infra/database/client";
+import { MemberRepository } from "../../infra/database/repositories/member/MemberRepository";
 
 export default new Command({
   name: "presence",
@@ -11,13 +12,11 @@ export default new Command({
     const guildId = interaction.guildId;
     const guild = interaction.client.guilds.cache.get(guildId!);
 
-    const date = new Date();
+    const memberRepository = new MemberRepository();
 
     try {
       for (const member of guild?.members.cache.values()!) {
-        const findMemberById = await Prisma.member.findFirst({
-          where: { id: member.user.id },
-        });
+        const findMemberById = await memberRepository.findMemberById(member.user.id);
 
         /**
          * Atualiza em caso de o membro estar cadastrado como "ativo" e fique "offline"
@@ -26,17 +25,7 @@ export default new Command({
           (findMemberById?.status === "ativo" && member.presence?.status === undefined) ||
           member.presence?.status === "offline"
         ) {
-          if (!findMemberById) return;
-
-          await Prisma.member.update({
-            where: {
-              id: findMemberById.id,
-            },
-            data: {
-              status: "offline",
-              lastOffline: date,
-            },
-          });
+          await memberRepository.updateMemberToOffline(findMemberById?.id!);
         }
 
         /**
@@ -48,15 +37,7 @@ export default new Command({
           (member.presence?.status === "invisible" && !findMemberById) ||
           (member.presence?.status === "dnd" && !findMemberById)
         ) {
-          await Prisma.member.create({
-            data: {
-              id: member.user.id,
-              username: member.user.username,
-              globalName: member.user.globalName || "Is bot",
-              status: "ativo",
-              isGuildMember: true,
-            },
-          });
+          await memberRepository.registerMemberActive(member);
         }
 
         /**
@@ -66,21 +47,15 @@ export default new Command({
           (member.presence?.status === undefined && !findMemberById) ||
           (member.presence?.status === "offline" && !findMemberById)
         ) {
-          await Prisma.member.create({
-            data: {
-              id: member.user.id,
-              username: member.user.username,
-              globalName: member.user.globalName || "Is bot",
-              status: "offline",
-              lastOffline: date,
-              isGuildMember: true,
-            },
-          });
+          await memberRepository.registerMemberOffline(member);
         }
       }
 
+      /**
+       * Torna membro online novamente
+       */
       for (const member of guild?.members.cache.values()!) {
-        const memberExistsValidation = await Prisma.member.findFirst({ where: { id: member.user.id } });
+        const memberExistsValidation = await memberRepository.findMemberById(member.user.id);
 
         if (
           (memberExistsValidation?.status === "offline" && member.presence?.status === "online") ||
@@ -88,15 +63,7 @@ export default new Command({
           (memberExistsValidation?.status === "offline" && member.presence?.status === "invisible") ||
           (memberExistsValidation?.status === "offline" && member.presence?.status === "dnd")
         ) {
-          await Prisma.member.update({
-            where: { id: memberExistsValidation?.id },
-            data: {
-              status: "ativo",
-              lastOffline: null,
-              isGuildMember: true,
-              lastCheckedGuildMember: null,
-            },
-          });
+          await memberRepository.updateMemberToOnline(memberExistsValidation.id);
         }
       }
     } catch (error) {

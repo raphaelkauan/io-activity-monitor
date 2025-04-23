@@ -1,6 +1,5 @@
 import { ApplicationCommandType, EmbedBuilder, MessageFlags } from "discord.js";
 import { Command } from "../../infra/settings/types/Command";
-import { Prisma } from "../../infra/database/client";
 import { validationAdmin } from "../support/func/validation/validationAdmin";
 import { membersAtivoFilter } from "../support/func/filter/membersAtivoFilter";
 import { MembersTenDayOffFilter } from "../support/func/filter/MembersTenDayOffFilter";
