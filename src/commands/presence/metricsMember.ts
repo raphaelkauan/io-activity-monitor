@@ -2,6 +2,7 @@ import { ApplicationCommandType, EmbedBuilder, MessageFlags } from "discord.js";
 import { Command } from "../../infra/settings/types/Command";
 import { Prisma } from "../../infra/database/client";
 import { validationAdmin } from "../support/func/validation/validationAdmin";
+import { membersAtivoFilter } from "../support/func/filter/membersAtivoFilter";
 
 export default new Command({
   name: "metrics-member",
@@ -12,40 +13,27 @@ export default new Command({
     if (!(await validationAdmin(interaction))) return;
 
     try {
-      const membersAtivoFilter = await Prisma.member.findMany({
-        where: { status: { equals: "ativo" } },
-        select: { username: true, globalName: true, status: true },
-      });
-
-      const metricsMembersAtivo = membersAtivoFilter.map(
-        (member) => `
-        • Nome: **${member.username}** NomeGlobal: **${member.globalName}** Status: **${member.status}**`
-      );
+      const membersAtivo = await membersAtivoFilter();
 
       // 10 dias atrás
       const today = new Date();
       const tenDaysBefore = new Date();
       tenDaysBefore.setDate(today.getDate() - 10);
 
-      console.log("10 " + tenDaysBefore);
-
       // 30 dias atrás
       const thirtyDayBefore = new Date();
       thirtyDayBefore.setDate(today.getDate() - 30);
 
-      console.log("30 " + thirtyDayBefore);
-
       // Menos de 30 dias e mais de 10 dias
       const membersTenDayOff = await Prisma.member.findMany({
-        where: { lastOffline: { gt: thirtyDayBefore, lte: tenDaysBefore } },
+        where: { lastOffline: { gt: thirtyDayBefore, lte: tenDaysBefore }, AND: { isGuildMember: true } },
         select: { username: true, globalName: true, lastOffline: true, status: true },
       });
 
-      console.log(membersTenDayOff);
-
       const metricsMembersTenDayOff = membersTenDayOff.map((member) => {
         const formatDate = new Date(member.lastOffline!).toLocaleDateString();
-        const format = `\n • Nome: **${member.username}** NomeGlobal: **${member.globalName}** Visto por último: **${formatDate}** Status: **${member.status}**`;
+        console.log(formatDate);
+        const format = `\n • Username: **${member.username}** UsernameGlobal: **${member.globalName}** Visto por último: **${formatDate}** Status: **${member.status}**`;
         return format;
       });
 
@@ -65,7 +53,7 @@ export default new Command({
           },
           {
             name: "**Membros ativos:**",
-            value: `${metricsMembersAtivo}`,
+            value: `${membersAtivo}`,
           },
         ]);
 
