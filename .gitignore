@@ -2,3 +2,4 @@
 /dist
 .env
 dev.db
+src/files/teste.txt
