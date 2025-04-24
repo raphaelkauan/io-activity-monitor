@@ -1,12 +1,24 @@
+import { Channel, TextChannel } from "discord.js";
+import { client } from "../..";
 import { MemberRepository } from "../../infra/database/repositories/member/MemberRepository";
 import { Event } from "../../infra/settings/types/Event";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export default new Event({
-  name: "messageCreate",
-  async run(interaction) {
-    if (interaction.content === "!presence") {
-      const guildId = interaction.guildId;
-      const guild = interaction.client.guilds.cache.get(guildId!);
+  name: "ready",
+  async run() {
+    setInterval(async () => {
+      const guild = client.guilds.cache.get(process.env.SERVIDOR_ID!);
+
+      const channel: Channel = client.channels.cache.get(process.env.CHANNEL_LOGS!)!;
+      if (!(channel instanceof TextChannel)) {
+        return;
+      }
+      channel.send({
+        content: `Check presence ${new Date()}`,
+      });
 
       console.log(`Check presence ${new Date()}`);
 
@@ -67,6 +79,6 @@ export default new Event({
       } catch (error) {
         console.log(error);
       }
-    }
+    }, 5000);
   },
 });

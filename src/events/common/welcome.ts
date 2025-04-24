@@ -22,7 +22,7 @@ export default new Event({
       .setColor("#ff0000")
       .setTitle(`Salve, ${interaction.displayName}!`)
       .setDescription(
-        `Você acaba de entrar no servidor **${process.env.NOME_SERVIDOR}**. 
+        `Você acaba de entrar no servidor **${process.env.SERVIDOR_NAME}**. 
         Aqui você poderá interagir com a comunidade, encontrar vagas, conversar sobre programação, tecnologia e muito mais!`
       )
       .setThumbnail(interaction.user.displayAvatarURL())
