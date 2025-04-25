@@ -1,10 +1,10 @@
 import { Prisma } from "../../../../infra/database/client";
 
-export async function MembersTenDayOffFilter(): Promise<string[]> {
-  // 10 dias atrás
+export async function membersFifteenDayOffFilter(): Promise<string[]> {
+  // 15 dias atrás
   const today = new Date();
-  const tenDaysBefore = new Date();
-  tenDaysBefore.setDate(today.getDate() - 10);
+  const fifteenDaysBefore = new Date();
+  fifteenDaysBefore.setDate(today.getDate() - 15);
 
   // 30 dias atrás
   const thirtyDayBefore = new Date();
@@ -12,7 +12,7 @@ export async function MembersTenDayOffFilter(): Promise<string[]> {
 
   // Menos de 30 dias e mais de 10 dias
   const membersTenDayOff = await Prisma.member.findMany({
-    where: { lastOffline: { gt: thirtyDayBefore, lte: tenDaysBefore }, AND: { isGuildMember: true } },
+    where: { lastOffline: { gt: thirtyDayBefore, lte: fifteenDaysBefore }, AND: { isGuildMember: true } },
     select: { username: true, globalName: true, lastOffline: true, status: true },
   });
 

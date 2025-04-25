@@ -2,7 +2,7 @@ import { ApplicationCommandType, EmbedBuilder, MessageFlags } from "discord.js";
 import { Command } from "../../infra/settings/types/Command";
 import { validationAdmin } from "../support/func/validation/validationAdmin";
 import { membersAtivoFilter } from "../support/func/filter/membersAtivoFilter";
-import { MembersTenDayOffFilter } from "../support/func/filter/MembersTenDayOffFilter";
+import { membersFifteenDayOffFilter } from "../support/func/filter/membersFifteenDayOffFilter";
 
 export default new Command({
   name: "metrics-member",
@@ -14,7 +14,7 @@ export default new Command({
 
     try {
       const membersAtivo = await membersAtivoFilter();
-      const membersTenDayOff = await MembersTenDayOffFilter();
+      const membersTenDayOff = await membersFifteenDayOffFilter();
 
       const embed = new EmbedBuilder()
         .setTitle(`Métricas **${interaction.guild?.name}**`)
