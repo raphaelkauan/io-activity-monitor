@@ -13,7 +13,7 @@ datasource db {
 model member {
   id                     String    @unique
   username               String
-  globalName             String    @map("globalname")
+  serverName             String    @map("servername")
   status                 String
   lastOffline            DateTime? @map("lastoffline")
   isGuildMember          Boolean   @map("isguildmember")

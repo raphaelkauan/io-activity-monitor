@@ -27,7 +27,7 @@ export class MemberRepository {
       data: {
         id: member.user.id,
         username: member.user.username,
-        globalName: member.user.globalName || "Is bot",
+        serverName: member.user.globalName || "Is bot",
         status: "ativo",
         isGuildMember: true,
       },
@@ -39,7 +39,7 @@ export class MemberRepository {
       data: {
         id: member.user.id,
         username: member.user.username,
-        globalName: member.user.globalName || "Is bot",
+        serverName: member.user.globalName || "Is bot",
         status: "offline",
         lastOffline: new Date(),
         isGuildMember: true,

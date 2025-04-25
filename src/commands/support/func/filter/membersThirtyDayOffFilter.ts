@@ -13,12 +13,12 @@ export async function membersThirtyDayOffFilter(): Promise<string[]> {
   // Menos de 90 dias e mais de 30 dias
   const membersThirtyDayOff = await Prisma.member.findMany({
     where: { lastOffline: { gt: ninetyDayBefore, lte: thirtyDayBefore }, AND: { isGuildMember: true } },
-    select: { username: true, globalName: true, lastOffline: true, status: true },
+    select: { username: true, serverName: true, lastOffline: true, status: true },
   });
 
   const metricsMembersThirtyDayOff = membersThirtyDayOff.map((member) => {
     const formatDate = new Date(member.lastOffline!).toLocaleDateString();
-    const format = `\n • Username: **${member.username}** UsernameGlobal: **${member.globalName}** Visto por último: **${formatDate}** Status: **${member.status}**`;
+    const format = `\n • Username: **${member.username}** UsernameGlobal: **${member.serverName}** Visto por último: **${formatDate}** Status: **${member.status}**`;
     return format;
   });
 
