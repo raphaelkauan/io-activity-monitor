@@ -1,22 +1,24 @@
 import { Prisma } from "../../../../infra/database/client";
 
 export async function membersFifteenDayOffFilter(): Promise<string[]> {
-  // 15 dias atrás
+  // 16 dias atrás
   const today = new Date();
-  const fifteenDaysBefore = new Date();
-  fifteenDaysBefore.setDate(today.getDate() - 15);
+  const fifteenDayBefore = new Date();
+  fifteenDayBefore.setDate(today.getDate() - 16);
 
-  // 30 dias atrás
+  // 31 dias atrás
   const thirtyDayBefore = new Date();
-  thirtyDayBefore.setDate(today.getDate() - 30);
+  thirtyDayBefore.setDate(today.getDate() - 31);
 
-  // Menos de 30 dias e mais de 10 dias
-  const membersTenDayOff = await Prisma.member.findMany({
-    where: { lastOffline: { gt: thirtyDayBefore, lte: fifteenDaysBefore }, AND: { isGuildMember: true } },
+  console.log(thirtyDayBefore);
+
+  // Menos de 30 dias e mais de 15 dias
+  const membersFifteenDayOff = await Prisma.member.findMany({
+    where: { lastOffline: { gt: thirtyDayBefore, lte: fifteenDayBefore }, AND: { isGuildMember: true } },
     select: { username: true, globalName: true, lastOffline: true, status: true },
   });
 
-  const metricsMembersTenDayOff = membersTenDayOff.map((member) => {
+  const metricsMembersFifteenDayOff = membersFifteenDayOff.map((member) => {
     const formatDate = new Date(member.lastOffline!).toLocaleDateString();
     const format = `\n • Username: **${member.username}** UsernameGlobal: **${member.globalName}** Visto por último: **${formatDate}** Status: **${member.status}**`;
     return format;
@@ -24,9 +26,9 @@ export async function membersFifteenDayOffFilter(): Promise<string[]> {
 
   let messageTenDayOff: string[];
 
-  if (metricsMembersTenDayOff.length !== 0) {
-    return (messageTenDayOff = metricsMembersTenDayOff);
+  if (metricsMembersFifteenDayOff.length !== 0) {
+    return (messageTenDayOff = metricsMembersFifteenDayOff);
   }
 
-  return (messageTenDayOff = ["Não existe um membro off +10 dias"]);
+  return (messageTenDayOff = ["Não existe um membro off +15 dias"]);
 }

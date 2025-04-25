@@ -3,6 +3,7 @@ import { Command } from "../../infra/settings/types/Command";
 import path from "path";
 import { membersAtivoFilter } from "../support/func/filter/membersAtivoFilter";
 import { membersFifteenDayOffFilter } from "../support/func/filter/membersFifteenDayOffFilter";
+import { membersThirtyDayOffFilter } from "../support/func/filter/membersThirtyDayOffFilter";
 import { writeFileSync } from "fs";
 import { formatDate } from "../support/func/util/formatDate";
 import fs from "fs";
@@ -20,6 +21,7 @@ export default new Command({
 
       const membersAtivo = await membersAtivoFilter();
       const membersTenDayOff = await membersFifteenDayOffFilter();
+      const membersThirtyDayOff = await membersThirtyDayOffFilter();
 
       const metricsTxt = `
       
@@ -33,7 +35,7 @@ export default new Command({
       ==============================================================================================================
       
       **Membros +30 dias off:**
-      ${data}
+      ${membersThirtyDayOff}
   
       ==============================================================================================================
       
