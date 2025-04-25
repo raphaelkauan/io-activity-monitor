@@ -7,6 +7,7 @@ import { membersThirtyDayOffFilter } from "../support/func/filter/membersThirtyD
 import { writeFileSync } from "fs";
 import { formatDate } from "../support/func/util/formatDate";
 import fs from "fs";
+import { membersNinetyDayOffFilter } from "../support/func/filter/membersNinetyDayOffFilter";
 
 export default new Command({
   name: "metrics-member-txt",
@@ -22,15 +23,21 @@ export default new Command({
       const membersAtivo = await membersAtivoFilter();
       const membersTenDayOff = await membersFifteenDayOffFilter();
       const membersThirtyDayOff = await membersThirtyDayOffFilter();
+      const membersNinetyDayOff = await membersNinetyDayOffFilter();
 
       const metricsTxt = `
       
       Métricas **${interaction.guild?.name}** - ${data}
+      
+      ==============================================================================================================
+      
+      **Saiu do rolê:**
+      ${data}
 
       ==============================================================================================================
       
       **Membros +90 dias off:**
-      ${data}
+      ${membersNinetyDayOff}
 
       ==============================================================================================================
       

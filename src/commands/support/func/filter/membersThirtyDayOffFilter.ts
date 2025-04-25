@@ -3,22 +3,23 @@ import { Prisma } from "../../../../infra/database/client";
 export async function membersThirtyDayOffFilter(): Promise<string[]> {
   // 31 dias atrás
   const today = new Date();
-  const thirtyDayBefore = new Date();
-  thirtyDayBefore.setDate(today.getDate() - 31);
+  const thirtyOneDayBefore = new Date();
+  thirtyOneDayBefore.setDate(today.getDate() - 31);
 
   // 91 dias atrás
-  const ninetyDayBefore = new Date();
-  ninetyDayBefore.setDate(today.getDate() - 91);
+  const ninetyOneDayBefore = new Date();
+  ninetyOneDayBefore.setDate(today.getDate() - 91);
 
   // Menos de 90 dias e mais de 30 dias
   const membersThirtyDayOff = await Prisma.member.findMany({
-    where: { lastOffline: { gt: ninetyDayBefore, lte: thirtyDayBefore }, AND: { isGuildMember: true } },
+    where: { lastOffline: { gt: ninetyOneDayBefore, lte: thirtyOneDayBefore }, AND: { isGuildMember: true } },
     select: { username: true, serverName: true, lastOffline: true, status: true },
   });
 
   const metricsMembersThirtyDayOff = membersThirtyDayOff.map((member) => {
     const formatDate = new Date(member.lastOffline!).toLocaleDateString();
-    const format = `\n • Username: **${member.username}** UsernameGlobal: **${member.serverName}** Visto por último: **${formatDate}** Status: **${member.status}**`;
+    const format = `
+      • Username: **${member.username}** ServerName: **${member.serverName}** Visto por último: **${formatDate}** Status: **${member.status}**`;
     return format;
   });
 
