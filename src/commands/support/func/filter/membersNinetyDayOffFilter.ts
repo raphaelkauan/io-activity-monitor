@@ -7,8 +7,6 @@ export async function membersNinetyDayOffFilter(): Promise<string[]> {
   const ninetyOneDayBefore = new Date();
   ninetyOneDayBefore.setDate(today.getDate() - 91);
 
-  console.log(ninetyOneDayBefore);
-
   // Mais de 90 dias
   const membersNinetyDayOff = await Prisma.member.findMany({
     where: { lastOffline: { lte: ninetyOneDayBefore }, AND: { isGuildMember: true } },
@@ -22,11 +20,11 @@ export async function membersNinetyDayOffFilter(): Promise<string[]> {
     return format;
   });
 
-  let messageTenDayOff: string[];
+  let messageNinetyDayOff: string[];
 
   if (metricsMembersNinetyDayOff.length !== 0) {
-    return (messageTenDayOff = metricsMembersNinetyDayOff);
+    return (messageNinetyDayOff = metricsMembersNinetyDayOff);
   }
 
-  return (messageTenDayOff = ["Não existe um membro off +90 dias"]);
+  return (messageNinetyDayOff = ["Não existe um membro off +90 dias"]);
 }

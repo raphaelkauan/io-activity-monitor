@@ -10,8 +10,6 @@ export async function membersFifteenDayOffFilter(): Promise<string[]> {
   const thirtyOneDayBefore = new Date();
   thirtyOneDayBefore.setDate(today.getDate() - 31);
 
-  console.log(thirtyOneDayBefore);
-
   // Menos de 30 dias e mais de 15 dias
   const membersFifteenDayOff = await Prisma.member.findMany({
     where: { lastOffline: { gt: thirtyOneDayBefore, lte: sixteenDayBefore }, AND: { isGuildMember: true } },
@@ -25,11 +23,11 @@ export async function membersFifteenDayOffFilter(): Promise<string[]> {
     return format;
   });
 
-  let messageTenDayOff: string[];
+  let messageFifteenDayOff: string[];
 
   if (metricsMembersFifteenDayOff.length !== 0) {
-    return (messageTenDayOff = metricsMembersFifteenDayOff);
+    return (messageFifteenDayOff = metricsMembersFifteenDayOff);
   }
 
-  return (messageTenDayOff = ["Não existe um membro off +15 dias"]);
+  return (messageFifteenDayOff = ["Não existe um membro off +15 dias"]);
 }

@@ -4,6 +4,8 @@ declare namespace NodeJS {
     SERVIDOR_NAME: string;
     SERVIDOR_ID: string;
 
+    TIME_CHECK_PRESENCE: string;
+
     CHANNEL_WELCOME_ID: string;
     SUPER_USER_ID: string;
     CLIENT_ID: string;

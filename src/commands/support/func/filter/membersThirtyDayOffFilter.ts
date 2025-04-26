@@ -23,11 +23,11 @@ export async function membersThirtyDayOffFilter(): Promise<string[]> {
     return format;
   });
 
-  let messageTenDayOff: string[];
+  let messageThirtyDayOff: string[];
 
   if (metricsMembersThirtyDayOff.length !== 0) {
-    return (messageTenDayOff = metricsMembersThirtyDayOff);
+    return (messageThirtyDayOff = metricsMembersThirtyDayOff);
   }
 
-  return (messageTenDayOff = ["Não existe um membro off +30 dias"]);
+  return (messageThirtyDayOff = ["Não existe um membro off +30 dias"]);
 }

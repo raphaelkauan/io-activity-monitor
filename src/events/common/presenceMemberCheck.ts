@@ -79,6 +79,6 @@ export default new Event({
       } catch (error) {
         console.log(error);
       }
-    }, 5000);
+    }, Number(process.env.TIME_CHECK_PRESENCE));
   },
 });

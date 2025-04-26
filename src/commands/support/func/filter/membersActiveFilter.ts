@@ -1,6 +1,6 @@
 import { Prisma } from "../../../../infra/database/client";
 
-export async function membersAtivoFilter(): Promise<string[]> {
+export async function membersActiveFilter(): Promise<string[]> {
   let messageMembersAtivo: string[];
 
   const count = await Prisma.member.count({
@@ -10,7 +10,7 @@ export async function membersAtivoFilter(): Promise<string[]> {
   });
 
   if (count !== 0) {
-    return (messageMembersAtivo = [`• Quantidade: ${count} membros`]);
+    return (messageMembersAtivo = [`${count}`]);
   }
 
   return (messageMembersAtivo = ["Não existe membros ativos"]);
