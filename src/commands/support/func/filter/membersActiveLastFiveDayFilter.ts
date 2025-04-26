@@ -1,10 +1,10 @@
 import { Prisma } from "../../../../infra/database/client";
 
-export async function membersActiveLastFiveDay(): Promise<string[]> {
-  // 5 dias atrás
+export async function membersActiveLastFiveDayFilter(): Promise<string[]> {
+  // 6 dias atrás
   const today = new Date();
-  const fiveDayBefore = new Date();
-  fiveDayBefore.setDate(today.getDate() - 6);
+  const sixDayBefore = new Date();
+  sixDayBefore.setDate(today.getDate() - 6);
 
   let messageMembersAtivo: string[];
 
@@ -13,7 +13,7 @@ export async function membersActiveLastFiveDay(): Promise<string[]> {
       OR: [
         {
           lastOffline: {
-            gt: fiveDayBefore,
+            gt: sixDayBefore,
           },
         },
         {

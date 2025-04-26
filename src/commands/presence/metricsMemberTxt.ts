@@ -1,14 +1,14 @@
 import { ApplicationCommandType, MessageFlags } from "discord.js";
 import { Command } from "../../infra/settings/types/Command";
 import path from "path";
-import { membersActiveFilter } from "../support/func/filter/membersActiveFilter";
 import { membersFifteenDayOffFilter } from "../support/func/filter/membersFifteenDayOffFilter";
 import { membersThirtyDayOffFilter } from "../support/func/filter/membersThirtyDayOffFilter";
 import { writeFileSync } from "fs";
 import { formatDate } from "../support/func/util/formatDate";
 import fs from "fs";
 import { membersNinetyDayOffFilter } from "../support/func/filter/membersNinetyDayOffFilter";
-import { membersActiveLastFiveDay } from "../support/func/filter/membersActiveLastFiveDay";
+import { membersActiveLastFiveDayFilter } from "../support/func/filter/membersActiveLastFiveDayFilter";
+import { membersLeftServerFilter } from "../support/func/filter/membersLeftServerFilter";
 
 export default new Command({
   name: "metrics-member-txt",
@@ -21,19 +21,20 @@ export default new Command({
       const fileName = `metrics-${data}.txt`;
       const filePath = path.join(__dirname, `../../files/${fileName}`);
 
-      const membersActiveLastFive = await membersActiveLastFiveDay();
-      const membersTenDayOff = await membersFifteenDayOffFilter();
-      const membersThirtyDayOff = await membersThirtyDayOffFilter();
+      const membersLeftServer = await membersLeftServerFilter();
       const membersNinetyDayOff = await membersNinetyDayOffFilter();
+      const membersThirtyDayOff = await membersThirtyDayOffFilter();
+      const membersTenDayOff = await membersFifteenDayOffFilter();
+      const membersActiveLastFive = await membersActiveLastFiveDayFilter();
 
       const metricsTxt = `
       
-      Métricas **${interaction.guild?.name}** - ${data}
+      Métricas **${interaction.guild?.name}** • ${data}
       
       ==============================================================================================================
       
       **Saiu do rolê:**
-      ${data}
+      ${membersLeftServer}
 
       ==============================================================================================================
       
@@ -52,7 +53,7 @@ export default new Command({
   
       ==============================================================================================================
       
-      **Total de membros vistos nos últimos 5 dias:**
+      **Total de membros que estiveram online nos últimos 5 dias:**
 
       • ${membersActiveLastFive} membros
   

@@ -1,6 +1,6 @@
 import { Prisma } from "../../../../infra/database/client";
 
-export async function membersActiveFilter(): Promise<string[]> {
+export async function membersActiveNowFilter(): Promise<string[]> {
   let messageMembersAtivo: string[];
 
   const count = await Prisma.member.count({
