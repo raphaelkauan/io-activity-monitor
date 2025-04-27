@@ -1,14 +1,12 @@
 import { Prisma } from "../../../../infra/database/client";
+import { getDateDaysBefore } from "../util/getDateDaysBefore";
 
 export async function membersFifteenDayOffFilter(): Promise<string[]> {
   // 16 dias atrás
-  const today = new Date();
-  const sixteenDayBefore = new Date();
-  sixteenDayBefore.setDate(today.getDate() - 16);
+  const sixteenDayBefore = getDateDaysBefore(16);
 
   // 31 dias atrás
-  const thirtyOneDayBefore = new Date();
-  thirtyOneDayBefore.setDate(today.getDate() - 31);
+  const thirtyOneDayBefore = getDateDaysBefore(31);
 
   // Menos de 30 dias e mais de 15 dias
   const membersFifteenDayOff = await Prisma.member.findMany({

@@ -68,7 +68,7 @@ export default new Event({
           }
         }
       } catch (error) {
-        console.log(error);
+        console.log(`\n⚠️ Ocorreu um erro no evento: "presenceMemberCheck" \n\n❌ ${error}`);
       }
     }, Number(process.env.TIME_CHECK_PRESENCE));
   },

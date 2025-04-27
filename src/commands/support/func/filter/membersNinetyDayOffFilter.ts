@@ -1,11 +1,11 @@
 import { Prisma } from "../../../../infra/database/client";
+import { getDateDaysBefore } from "../util/getDateDaysBefore";
 
 export async function membersNinetyDayOffFilter(): Promise<string[]> {
   const today = new Date();
 
   // 91 dias atrás
-  const ninetyOneDayBefore = new Date();
-  ninetyOneDayBefore.setDate(today.getDate() - 91);
+  const ninetyOneDayBefore = getDateDaysBefore(91);
 
   // Mais de 90 dias
   const membersNinetyDayOff = await Prisma.member.findMany({

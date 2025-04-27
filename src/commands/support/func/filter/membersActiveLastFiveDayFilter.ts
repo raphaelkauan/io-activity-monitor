@@ -1,10 +1,9 @@
 import { Prisma } from "../../../../infra/database/client";
+import { getDateDaysBefore } from "../util/getDateDaysBefore";
 
 export async function membersActiveLastFiveDayFilter(): Promise<string[]> {
   // 6 dias atrás
-  const today = new Date();
-  const sixDayBefore = new Date();
-  sixDayBefore.setDate(today.getDate() - 6);
+  const sixDayBefore = getDateDaysBefore(6);
 
   let messageMembersAtivo: string[];
 
