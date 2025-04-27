@@ -1,11 +1,11 @@
 import { CommandInteraction, MessageFlags } from "discord.js";
 import dotenv from "dotenv";
-import { colors } from "../../../../styles/colors.json";
-import { createEmbedInformation } from "../components/createEmbedInformation";
+import { colors } from "../../../../../styles/colors.json";
+import { createEmbedInformation } from "../../components/createEmbedInformation";
 
 dotenv.config();
 
-export async function validationSuperUser(interaction: CommandInteraction) {
+export async function validationIsSuperUser(interaction: CommandInteraction) {
   const superUserId = process.env.SUPER_USER_ID;
 
   if (interaction.user.id !== superUserId) {

@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export async function validationBot(cargoBotId: GuildMember | null) {
+export async function validationIsBot(cargoBotId: GuildMember | null) {
   const cargoBot = process.env.CARGO_BOT;
 
   if (cargoBotId) {

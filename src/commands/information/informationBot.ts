@@ -1,7 +1,7 @@
 import { ApplicationCommandType, ColorResolvable, EmbedBuilder, formatEmoji } from "discord.js";
 import { Command } from "../../infra/settings/types/Command";
 import { colors } from "../../styles/colors.json";
-import { validationSuperUser } from "../support/func/validation/validationSuperUser";
+import { validationIsSuperUser } from "../support/func/validation/cargo/validationIsSuperUser";
 
 export default new Command({
   name: "apresentacao-bot",
@@ -9,7 +9,7 @@ export default new Command({
   description: "Este comando fornece uma breve apresentação do bot.",
 
   async run({ interaction }) {
-    if (!(await validationSuperUser(interaction))) return;
+    if (!(await validationIsSuperUser(interaction))) return;
 
     const embed = new EmbedBuilder()
       .setColor(colors.yellow as ColorResolvable)

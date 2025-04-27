@@ -9,13 +9,18 @@ import fs from "fs";
 import { membersNinetyDayOffFilter } from "../support/func/filter/membersNinetyDayOffFilter";
 import { membersActiveLastFiveDayFilter } from "../support/func/filter/membersActiveLastFiveDayFilter";
 import { membersLeftServerFilter } from "../support/func/filter/membersLeftServerFilter";
+import { validationIsAdmin } from "../support/func/validation/cargo/validationIsAdmin";
 
 export default new Command({
   name: "metrics-member-txt",
-  description: "Este comando enviar um arquivo .txt com métricas do servidor ",
+  description: "Este comando envia um arquivo .txt com métricas do servidor ",
   type: ApplicationCommandType.ChatInput,
 
   async run({ interaction }) {
+    if (!(await validationIsAdmin(interaction))) return;
+
+    await interaction.deferReply({ flags: MessageFlags.Ephemeral });
+
     try {
       const data = formatDate();
       const fileName = `metrics-${data}.txt`;
@@ -61,7 +66,7 @@ export default new Command({
 
       writeFileSync(filePath, metricsTxt);
 
-      await interaction.reply({ files: [filePath], flags: MessageFlags.Ephemeral });
+      await interaction.editReply({ files: [filePath] });
 
       fs.unlinkSync(filePath);
     } catch (error) {

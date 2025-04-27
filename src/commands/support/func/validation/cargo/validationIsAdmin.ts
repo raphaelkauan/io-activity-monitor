@@ -1,15 +1,19 @@
 import { CommandInteraction, GuildMember, MessageFlags } from "discord.js";
+import { createEmbedInformation } from "../../components/createEmbedInformation";
+import { colors } from "../../../../../styles/colors.json";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-export async function validationAdmin(interaction: CommandInteraction) {
+export async function validationIsAdmin(interaction: CommandInteraction) {
   const cargoAdmId = process.env.CARGO_ADMIN_ID;
 
   if (interaction.member instanceof GuildMember) {
     if (!interaction.member?.roles.cache.has(cargoAdmId!)) {
       await interaction.reply({
-        content: `<@${interaction.user.id}> você não tem permissão para executar esse comando!`,
+        embeds: [
+          createEmbedInformation(colors.red, "Atenção", "Você não tem permissão para executar este comando!"),
+        ],
         flags: MessageFlags.Ephemeral,
       });
       return false;

@@ -1,7 +1,7 @@
 import { CommandInteraction, MessageFlags } from "discord.js";
 import dotenv from "dotenv";
-import { createEmbedInformation } from "../components/createEmbedInformation";
-import { colors } from "../../../../styles/colors.json";
+import { createEmbedInformation } from "../../components/createEmbedInformation";
+import { colors } from "../../../../../styles/colors.json";
 
 dotenv.config();
 
@@ -14,7 +14,7 @@ export async function validationChannel(interaction: CommandInteraction): Promis
         createEmbedInformation(
           colors.yellow,
           "Informação",
-          "Você está tentando executar este comando no canal errado. Por favor, utilize o canal para pedidos de música."
+          "Você está tentando executar este comando no canal errado!."
         ),
       ],
       flags: MessageFlags.Ephemeral,
