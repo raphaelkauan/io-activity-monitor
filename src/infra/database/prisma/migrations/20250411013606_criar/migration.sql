@@ -2,7 +2,7 @@
 CREATE TABLE "member" (
     "id" TEXT NOT NULL,
     "username" TEXT NOT NULL,
-    "globalname" TEXT NOT NULL,
+    "servername" TEXT NOT NULL,
     "status" TEXT NOT NULL,
     "lastoffline" DATETIME,
     "isguildmember" BOOLEAN NOT NULL,

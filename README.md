@@ -1,8 +1,22 @@
-# 👾 Bot
+# io-activity-monitor
+
+**io-activity-monitor** é um bot de monitoramento de atividade para servidores Discord.
+Ele registra quando membros saem do servidor, monitora o tempo de inatividade dos usuários e gera um relatório com métricas do servidor.
 
 ## 📚 Funcionalidades
 
-Além de enviar uma mensagem de boas-vindas sempre que um novo membro entra no servidor, este bot também oferece os seguintes comandos para interagir com o servidor:
+- Detecta saídas de membros do servidor.
+- Monitora a presença e o tempo de inatividade dos membros.
+- Gera um arquivo .txt contendo métricas do servidor, como:
+  - Quem saiu do servidor
+  - Membros +90 dias off
+  - Membros +30 dias off
+  - Membros +15 dias off
+  - Total de membros que estiveram online nos últimos 5 dias
+
+## Exemplo de arquivo .txt gerado
+
+<img width="200" src="" alt="exemplo" title="exemplo"/>
 
 ## 📝 Tarefas
 
@@ -15,11 +29,11 @@ Além de enviar uma mensagem de boas-vindas sempre que um novo membro entra no s
 
 - Como faço para rodar o projeto na minha máquina?
 
-  Você pode seguir o [Guia de instalação]().
+  Você pode seguir o [Guia de instalação](https://github.com/raphaelkauan/io-activity-monitor/blob/main/GUIA_INSTALACAO.md).
 
 - Onde posso pedir ajudar?
 
-  Você pode criar uma [Issue no repositório]().
+  Você pode criar uma [Issue no repositório](https://github.com/raphaelkauan/io-activity-monitor/issues).
 
 - Como faço para contribuir com o projeto?
 

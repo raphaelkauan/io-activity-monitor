@@ -1,4 +1,4 @@
-## 💾 Instalação
+## 📁 Instalação
 
 ## Pré-requisitos
 
@@ -17,7 +17,7 @@ Siga os passos abaixo para configurar e executar o projeto.
 No terminal, execute o comando abaixo para clonar o repositório do projeto:
 
 ```bash
-git clone https://github.com/raphaelkauan/stuart
+git clone https://github.com/raphaelkauan/io-activity-monitor
 ```
 
 ### 2. Instale as dependências
@@ -25,7 +25,7 @@ git clone https://github.com/raphaelkauan/stuart
 Acesse o diretório do projeto e instale as dependências necessárias:
 
 ```bash
-cd stuart
+cd io-activity-monitor
 npm install
 ```
 
@@ -34,17 +34,23 @@ npm install
 Crie um arquivo `.env` na raiz do projeto e adicione as seguintes variáveis, substituindo pelos valores apropriados:
 
 ```env
-BOT_TOKEN_DC=
-NOME_SERVIDOR=
-CHANNEL_WELCOME_ID=
-SUPER_USER_ID=
-CLIENT_ID=
-CARGO_ADMIN_ID=
+BOT_TOKEN_DC= # token do bot do Discord
+CLIENT_ID= # id do bot no Discord
+SERVIDOR_NAME= # nome do servidor Discord
+SERVIDOR_ID= # id do servidor Discord
 
-DATABASE_URL=
+TIME_CHECK_PRESENCE= # intervalo para checar presença dos membros (ms)
+TIME_CHECK_GUILD_MEMBER= # intervalo para verificar membros que saíram (ms)
 
-CHANNEL_REGRAS=
-CHANNEL_CONTEUDO=
+CARGO_ADMIN_ID= # id do cargo de administrador
+SUPER_USER_ID= # id do super usuário
+CARGO_BOT= # id do cargo atribuído a bots
+
+DATABASE_URL= # url de conexão com o banco de dados
+
+CHANNEL_WELCOME_ID= # id do canal de boas-vindas
+CHANNEL_REGRAS= # id do canal de regras
+CHANNEL_CONTEUDO= # id do canal de conteúdo
 ```
 
 ### 4. Inicie o projeto
@@ -55,4 +61,4 @@ Agora você pode iniciar o projeto com o seguinte comando:
 npm run dev
 ```
 
-Qualquer dúvida ou incidente verifique nossa sessão de [perguntas](https://github.com/raphaelkauan/bot-localhost).
+Qualquer dúvida ou incidente verifique nossa sessão de [perguntas](https://github.com/raphaelkauan/io-activity-monitor/issues).
