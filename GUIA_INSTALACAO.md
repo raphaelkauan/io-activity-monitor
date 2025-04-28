@@ -43,14 +43,14 @@ TIME_CHECK_PRESENCE= # intervalo para checar presença dos membros (ms)
 TIME_CHECK_GUILD_MEMBER= # intervalo para verificar membros que saíram (ms)
 
 CARGO_ADMIN_ID= # id do cargo de administrador
-SUPER_USER_ID= # id do super usuário
+SUPER_USER_ID= # id do super usuário (opcional)
 CARGO_BOT= # id do cargo atribuído a bots
 
 DATABASE_URL= # url de conexão com o banco de dados
 
-CHANNEL_WELCOME_ID= # id do canal de boas-vindas
-CHANNEL_REGRAS= # id do canal de regras
-CHANNEL_CONTEUDO= # id do canal de conteúdo
+CHANNEL_WELCOME_ID= # id do canal de boas-vindas (opcional)
+CHANNEL_REGRAS= # id do canal de regras (opcional)
+CHANNEL_CONTEUDO= # id do canal de conteúdo (opcional)
 ```
 
 ### 4. Inicie o projeto
