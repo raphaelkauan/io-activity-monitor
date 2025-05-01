@@ -16,7 +16,7 @@ Ele registra quando membros saem do servidor, monitora o tempo de inatividade do
 
 ## Exemplo de arquivo .txt gerado
 
-<img width="600" src="./assets/123123123.png" alt="exemplo" title="exemplo"/>
+<img width="590" src="./src/assets/img.png" alt="exemplo" title="exemplo"/>
 
 ## Tarefas
 
