@@ -13,6 +13,10 @@ Ele registra quando membros saem do servidor, monitora o tempo de inatividade do
   - Membros +30 dias off
   - Membros +15 dias off
   - Total de membros que estiveram online nos últimos 5 dias
+ 
+## Como gerar o arquivo .txt?
+
+Execute: /metrics-member-txt
 
 ## Exemplo de arquivo .txt gerado
 
