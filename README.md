@@ -1,6 +1,6 @@
 # io-activity-monitor
 
-**io-activity-monitor** é um bot de monitoramento de atividade para servidores Discord.
+Este projeto é um bot de monitoramento de atividade para servidores Discord.
 Ele registra quando membros saem do servidor, monitora o tempo de inatividade dos usuários e gera um arquivo .txt com métricas do servidor.
 
 ## Funcionalidades
