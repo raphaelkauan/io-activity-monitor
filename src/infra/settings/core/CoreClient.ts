@@ -68,7 +68,12 @@ export class CoreClient extends Client {
       files.forEach((file) => {
         const fullPath = path.join(dir, file);
 
-        if (fullPath.includes("information") || fullPath.includes("presence") || fullPath.includes("test")) {
+        if (
+          fullPath.includes("information") ||
+          fullPath.includes("admin") ||
+          fullPath.includes("presence") ||
+          fullPath.includes("test")
+        ) {
           if (fs.statSync(fullPath).isDirectory()) {
             filesList = filesList.concat(getFilesRecursively(fullPath));
           } else if (fileCondition(file)) {

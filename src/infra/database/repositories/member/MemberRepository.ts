@@ -59,4 +59,8 @@ export class MemberRepository {
       },
     });
   }
+
+  async deleteAllData() {
+    await Prisma.member.deleteMany();
+  }
 }

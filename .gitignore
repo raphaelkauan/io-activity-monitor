@@ -3,3 +3,4 @@
 .env
 dev.db
 dev.db-journal
+discloud.config

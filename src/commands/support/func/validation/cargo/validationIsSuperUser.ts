@@ -1,4 +1,4 @@
-import { CommandInteraction, MessageFlags } from "discord.js";
+import { CommandInteraction, MessageFlags, OmitPartialGroupDMChannel } from "discord.js";
 import dotenv from "dotenv";
 import { colors } from "../../../../../styles/colors.json";
 import { createEmbedInformation } from "../../components/createEmbedInformation";
