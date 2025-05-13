@@ -16,6 +16,8 @@ export default new Event({
       const memberRepository = new MemberRepository();
 
       try {
+        await guild?.members.fetch();
+
         for (const member of guild?.members.cache.values()!) {
           const findMemberById = await memberRepository.findMemberById(member.user.id);
 
