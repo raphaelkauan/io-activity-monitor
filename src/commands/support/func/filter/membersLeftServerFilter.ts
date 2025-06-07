@@ -15,7 +15,7 @@ export async function membersLeftServerFilter(): Promise<string[]> {
   const metricsMemberLeftServer = memberLeftServer.map((member) => {
     const formatDate = new Date(member.lastCheckedGuildMember!).toLocaleDateString();
     const format = `
-      • Username: **${member.username}** ServerName: **${member.serverName}** Última verificação de saída: **${formatDate}**`;
+      - Username: ${member.username} | ServerName: ${member.serverName} | Última verificação de saída: ${formatDate}`;
     return format;
   });
 

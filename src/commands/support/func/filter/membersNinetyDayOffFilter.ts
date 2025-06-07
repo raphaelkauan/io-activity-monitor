@@ -16,7 +16,7 @@ export async function membersNinetyDayOffFilter(): Promise<string[]> {
   const metricsMembersNinetyDayOff = membersNinetyDayOff.map((member) => {
     const formatDate = new Date(member.lastOffline!).toLocaleDateString();
     const format = `
-      • Username: **${member.username}** ServerName: **${member.serverName}** Visto por último: **${formatDate}** Status: **${member.status}**`;
+      - Username: ${member.username} | ServerName: ${member.serverName} | Visto por último: ${formatDate} Status: ${member.status}`;
     return format;
   });
 

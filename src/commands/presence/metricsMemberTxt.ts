@@ -34,33 +34,33 @@ export default new Command({
 
       const metricsTxt = `
       
-      Métricas **${interaction.guild?.name}** • ${data}
+      Métricas ${interaction.guild?.name} • ${data}
       
       ==============================================================================================================
       
-      **Saiu do rolê:**
+      Saiu do rolê:
       ${membersLeftServer}
 
       ==============================================================================================================
       
-      **Membros +90 dias off:**
+      Membros +90 dias off:
       ${membersNinetyDayOff}
 
       ==============================================================================================================
       
-      **Membros +30 dias off:**
+      Membros +30 dias off:
       ${membersThirtyDayOff}
   
       ==============================================================================================================
       
-      **Membros +15 dias off:**
+      Membros +15 dias off:
       ${membersTenDayOff}
   
       ==============================================================================================================
       
-      **Total de membros que estiveram online nos últimos 5 dias:**
+      Total de membros que estiveram online nos últimos 5 dias:
 
-      • ${membersActiveLastFive} membros
+      - ${membersActiveLastFive} membros
   
       `;
 

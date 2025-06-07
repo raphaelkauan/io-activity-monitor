@@ -6,7 +6,8 @@
     "dev": "ts-node src/index.ts",
     "build": "tsc",
     "start": "npm install && npx prisma migrate dev --schema=src/infra/database/prisma/schema.prisma && npm run build && node dist/src/index.js",
-    "deploy": "npm install && npx prisma migrate dev --schema=infra/database/prisma/schema.prisma && node index.js"
+    "deploy": "npm install && npx prisma migrate dev --schema=infra/database/prisma/schema.prisma && node index.js",
+    "cloud": "npm install && npx prisma db push --schema=infra/database/prisma/schema.prisma && node index.js"
   },
   "keywords": [],
   "author": "",
